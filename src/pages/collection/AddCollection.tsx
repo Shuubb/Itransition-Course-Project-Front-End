@@ -7,10 +7,7 @@ export default function AddCollection() {
 
     const { topicOptions } = useLoaderData() as { topicOptions: string[] };
 
-    const handleTextareaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const textarea = e.target;
-        textarea.style.height = `${textarea.scrollHeight}px`;
-    };
+    const handleTextareaChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
     function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>): void {
         if (!e.target.files) return;
@@ -41,10 +38,9 @@ export default function AddCollection() {
                 <Form.Control
                     required
                     className="my-3"
-                    as="textarea"
                     type="text"
                     placeholder=""
-                    onChange={handleTextareaChange}
+                    onChange={(e) => (e.target.style.height = `${e.target.scrollHeight}px`)}
                     name="description"
                 />
             </FloatingLabel>

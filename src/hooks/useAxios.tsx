@@ -13,9 +13,7 @@ export default function useAxios() {
         axiosInstance.interceptors.response.use(
             (res) => res,
             (err) => {
-                if (err.status === "401" || err.status === "403") redirect("/login");
-                const res = err.response;
-                throw res;
+                throw err.response;
             }
         );
         axiosInstance.defaults.headers.common["Authorization"] = user && `Token ${user.token}`;

@@ -47,7 +47,7 @@ export default function Index() {
                     tags.map((tag) => (
                         <Col key={tag.name + tag.id}>
                             <Link
-                                to="#"
+                                to={`/items/?tag=${tag.name}`}
                                 className="text-decoration-none text-light-subtle bg-dark-subtle px-2 py-1 rounded hover-shadow"
                             >
                                 {tag.name}

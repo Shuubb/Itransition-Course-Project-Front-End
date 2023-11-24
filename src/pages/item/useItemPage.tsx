@@ -10,15 +10,20 @@ export const useItemPage: usePageHook = () => {
         element: <Item />,
         loader: async ({ params }) => {
             if (params.itemId) {
-                const res = await axios.get(`item_management/items/${params.itemId}/`);
-                const item = res.data;
+                const [itemRes, commentsRes] = await Promise.all([
+                    axios.get(`item_management/items/${params.itemId}/`),
+                    axios.get(`item_management/comments/?item_id=${params.itemId}`),
+                ]);
 
-                return [item];
+                const item = itemRes.data;
+                const comments = commentsRes.data;
+
+                return { items: [item], comments };
             } else {
                 const res = await axios.get(`item_management/items/`);
                 const items = res.data;
                 if (items.length === 1) return redirect(`/items/${items[0].id}/`);
-                return items;
+                return { items: items };
             }
         },
         action: async ({ params, request }) => {
