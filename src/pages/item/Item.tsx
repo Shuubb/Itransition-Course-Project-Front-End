@@ -13,12 +13,16 @@ export type ItemType = {
     collection_name: string;
     creator: number;
     tags: Tag[];
-    comments: string[];
+    likes: Like[];
 };
 
 export type Tag = {
     id: number;
     name: string;
+};
+export type Like = {
+    id: number;
+    user: number;
 };
 export type Comment = {
     id: number;
@@ -66,6 +70,7 @@ export default function Item() {
                     items.map((item, index) => (
                         <Col key={item.name + index}>
                             <ItemCard item={item} link={items.length > 1} />
+                            
                         </Col>
                     ))
                 ) : (
